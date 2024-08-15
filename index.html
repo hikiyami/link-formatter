@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منسق الروابط</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --background-color: #f5f7fa;
+            --text-color: #34495e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .input-section, .output-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .input-column {
+            width: 48%;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        button {
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            line-break: anywhere;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-info {
+            background-color: #9b59b6;
+        }
+
+        .btn-info:hover {
+            background-color: #8e44ad;
+        }
+
+        .copyBtn {
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copyBtn::after {
+            content: "تم النسخ!";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #27ae60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .copyBtn.copied::after {
+            transform: translateY(0);
+        }
+
+        .code-editor-container {
+            display: flex;
+            margin-bottom: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .line-numbers {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-right: 2px solid #e0e0e0;
+            text-align: right;
+            user-select: none;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        #editor {
+            flex-grow: 1;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre;
+            overflow-x: auto;
+            min-height: 200px;
+            resize: vertical;
+            border: none;
+            outline: none;
+        }
+
+        #htmlResult table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        #htmlResult table, #htmlResult th, #htmlResult td {
+            border: 1px solid #ddd;
+        }
+
+        #htmlResult th, #htmlResult td {
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        #htmlResult tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #htmlResult a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #htmlResult a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        li.link-input {
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
+        li.link-input::marker {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .link-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .link-input input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .link-input button {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+
+        .btn-up, .btn-down, .btn-delete {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-up:hover, .btn-down:hover, .btn-delete:hover {
+            background-color: #2980b9;
+        }
+
+        #linkInputs {
+            list-style-type: decimal;
+            padding-right: 20px;
+        }
+
+        #linkInputs li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .input-section {
+                flex-direction: column;
+            }
+
+            .input-column {
+                width: 100%;
+            }
+
+            .link-input {
+                flex-wrap: wrap;
+            }
+
+            .link-input input {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>منسق الروابط</h1>
+        <div class="input-section">
+            <div class="input-column">
+                <div id="autoInputs">
+                    <div class="code-editor-container">
+                        <div class="line-numbers"></div>
+                        <textarea id="editor" wrap="off" placeholder="أدخل الروابط هنا، رابط واحد لكل سطر"></textarea>
+                    </div>
+                </div>
+                <div id="manualInputs">
+                    <ol id="linkInputs"></ol>
+                    <button id="addLinkBtn" class="btn btn-primary" onclick="addLinkInput()">إضافة رابط</button>
+                </div>
+            </div>
+            <div class="input-column">
+                <label for="separator">الفاصل بين الروابط:</label>
+                <input type="text" id="separator" value=" - ">
+                <label for="numbering">طريقة الترقيم:</label>
+                <select id="numbering">
+                    <option value="auto">تلقائي</option>
+                    <option value="manual">يدوي</option>
+                </select>
+                <label for="format">تنسيق النتيجة:</label>
+                <select id="format">
+                    <option value="list">قائمة</option>
+                    <option value="table">جدول</option>
+                </select>
+                <label for="linksPerRow">عدد الروابط في كل صف:</label>
+                <input type="number" id="linksPerRow" value="10" min="1">
+                <button class="btn btn-primary" onclick="formatLinks()">تنسيق الروابط</button>
+            </div>
+        </div>
+        <div class="output-section">
+            <div id="bbcodeResult" class="result"></div>
+            <button id="copyBBCodeBtn" class="btn btn-info copyBtn" onclick="copyResult('bbcodeResult')">نسخ النتيجة (BBCode)</button>
+            <div id="htmlResult" class="result"></div>
+            <!-- <button id="copyHTMLBtn" class="btn btn-info copyBtn" onclick="copyResult('htmlResult')">نسخ النتيجة (HTML)</button> -->
+        </div>
+    </div>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const lineNumbers = document.querySelector('.line-numbers');
+
+        const updateLineNumbers = () => {
+            const lines = editor.value.split('\n');
+            lineNumbers.innerHTML = lines.map((_, index) => `<div>${index + 1}</div>`).join('');
+        };
+
+        editor.addEventListener('input', updateLineNumbers);
+        editor.addEventListener('scroll', () => {
+            lineNumbers.scrollTop = editor.scrollTop;
+        });
+
+        const createLinkInputElement = (options) => {
+            let { type, placeholder, className, value } = options;
+            const input = document.createElement('input');
+            input.placeholder = placeholder;
+            input.className = type;
+            input.value = value;
+            input.addEventListener('keydown', handleEnterKey);
+            return input;
+        };
+
+        const createButton = (options) => {
+            let { text, onClick, className } = options;
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.onclick = onClick;
+            button.className = className;
+            return button;
+        };
+
+        const addLinkInput = (link = '', label = '') => {
+            const linkInputs = document.getElementById('linkInputs');
+            const li = document.createElement('li');
+            li.className = 'link-input';
+            
+            const container = document.createElement('div');
+            container.className = 'link-input-container';
+            
+            let linkInput = createLinkInputElement({ type: 'link', placeholder: 'الرابط', value: link });
+            container.appendChild(linkInput);
+            container.appendChild(createLinkInputElement({ type: 'label', placeholder: 'التسمية', value: label }));
+            container.appendChild(createButton({ text: '↑', onClick: () => moveLink(li, 'up'), className: 'btn-up' }));
+            container.appendChild(createButton({ text: '↓', onClick: () => moveLink(li, 'down'), className: 'btn-down' }));
+            container.appendChild(createButton({ text: 'x', onClick: () => deleteLink(li), className: 'btn-delete' }));
+            
+            li.appendChild(container);
+            linkInputs.appendChild(li);
+            linkInput.focus();
+        };
+
+        const handleEnterKey = (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addLinkInput();
+            }
+        };
+
+        const deleteLink = (li) => li.remove();
+
+        const moveLink = (li, direction) => {
+            const linkInputs = document.getElementById('linkInputs');
+            const sibling = direction === 'up' ? li.previousElementSibling : li.nextElementSibling;
+            if (sibling) {
+                linkInputs.insertBefore(direction === 'up' ? li : sibling, direction === 'up' ? sibling : li);
+            } else {
+                if(direction === 'up') linkInputs.appendChild(li);
+                else linkInputs.insertBefore(li, linkInputs.firstElementChild);
+            }
+        };
+
+        const formatLinks = () => {
+            const config = {
+                numbering: document.getElementById('numbering').value,
+                separator: document.getElementById('separator').value,
+                format: document.getElementById('format').value,
+                linksPerRow: parseInt(document.getElementById('linksPerRow').value)
+            };
+            
+            const formatFunction = config.format === 'list' ? formatLinksList : formatLinksTable;
+            const bbcodeResult = formatFunction({ ...config, outputType: 'bbcode' });
+            const htmlResult = formatFunction({ ...config, outputType: 'html' });
+            
+            document.getElementById('bbcodeResult').textContent = bbcodeResult.trim();
+            document.getElementById('htmlResult').innerHTML = htmlResult.trim();
+        };
+
+        const getLinks = (numbering) => {
+            return numbering === 'auto' ? getTextareaLinks() : 
+                Array.from(document.querySelectorAll('#linkInputs li'))
+                    .map(li => ({
+                        link: li.querySelector('.link').value.trim(),
+                        label: li.querySelector('.label').value.trim()
+                    }))
+                    .filter(item => item.label);
+        };
+
+        const formatLinksList = ({ numbering, separator, linksPerRow, outputType }) => {
+            const links = getLinks(numbering);
+            return links.reduce((result, link, index) => {
+                if (index % linksPerRow === 0 && index !== 0) result += '\n\n';
+                const formattedLink = formatLink({ link, index, numbering, outputType });
+                const isLastElement = index === links.length - 1;
+                const isLastInRow = (index + 1) % linksPerRow === 0;
+                return result + formattedLink + 
+                    (!isLastElement && !isLastInRow ? separator : '');
+            }, '');
+        };
+
+        const formatLinksTable = ({ numbering, linksPerRow, outputType }) => {
+            const links = getLinks(numbering);
+            const tableStart = outputType === 'bbcode' ? '[table]\n' : '<table>\n';
+            const tableEnd = outputType === 'bbcode' ? '[/table]' : '</table>';
+            const rowStart = outputType === 'bbcode' ? '[tr]' : '<tr>';
+            const rowEnd = outputType === 'bbcode' ? '[/tr]\n' : '</tr>\n';
+
+            return tableStart + links.reduce((result, link, index) => {
+                if (index % linksPerRow === 0) result += rowStart;
+                result += formatLink({ link, index, numbering, outputType, isTable: true });
+                if (index % linksPerRow === linksPerRow - 1 || index === links.length - 1) result += rowEnd;
+                return result;
+            }, '') + tableEnd;
+        };
+
+        const formatLink = ({ link, index, numbering, outputType, isTable = false, paddingStart = 2 }) => {
+            const number = (index + 1).toString().padStart(paddingStart, '0');
+            const displayText = numbering === 'auto' ? number : (link.label || number);
+            const url = numbering === 'auto' ? link : link.link;
+            if (outputType === 'bbcode') {
+                return `${isTable ? '[td]' : ''}${url ? `[url=${url}]${displayText}[/url]` : displayText}${isTable ? '[/td]' : ''}`;
+            } else {
+                return `${isTable ? '<td>' : ''}${url ? `<a href="${url}">${displayText}</a>` : displayText}${isTable ? '</td>' : ''}`;
+            }
+        };
+
+        const toggleInputMode = () => {
+            const numbering = document.getElementById('numbering').value;
+            document.getElementById('autoInputs').style.display = numbering === 'auto' ? 'block' : 'none';
+            document.getElementById('manualInputs').style.display = numbering === 'auto' ? 'none' : 'block';
+            if (numbering === 'manual' && document.querySelectorAll('.link-input').length === 0) {
+                addLinkInput();
+            }
+        };
+
+        const getTextareaLinks = () => editor.value.split('\n').map(line => line.trim());
+
+        const copyResult = (resultId) => {
+            const result = document.getElementById(resultId).textContent;
+            const copyBtn = document.getElementById(resultId === 'bbcodeResult' ? 'copyBBCodeBtn' : 'copyHTMLBtn');
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(result).then(() => showCopiedFeedback(copyBtn));
+            } else {
+                const textArea = document.createElement('textarea');
+                textArea.value = result;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopiedFeedback(copyBtn);
+            }
+        };
+
+        const showCopiedFeedback = (copyBtn) => {
+            copyBtn.classList.add('copied');
+            setTimeout(() => copyBtn.classList.remove('copied'), 2000);
+        };
+
+        document.getElementById('numbering').addEventListener('change', toggleInputMode);
+
+        // Initialize
+        updateLineNumbers();
+        toggleInputMode();
+    </script>
+</body>
+
+</html>
