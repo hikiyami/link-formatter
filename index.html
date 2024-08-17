@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-        <title>منسق الروابط - أداة لتنسيق وتنظيم الروابط</title>
-        
-        <!-- Meta tags for SEO -->
-        <meta name="description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
-        <meta name="keywords" content="منسق روابط, تنظيم روابط, أداة ويب, BBCode, URL, HTML, format links, link formatter, link organizer">
-        <meta name="author" content="Hikiyami">
-        <meta name="robots" content="index, follow">
-        
-        <!-- Open Graph -->
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://hikiyami.github.io/link-formatter/">
-        <meta property="og:title" content="منسق الروابط - أداة لتنسيق وتنظيم الروابط">
-        <meta property="og:description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
-        <meta property="og:image" content="./icons/og-image.png">
-    
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary">
-        <meta property="twitter:url" content="https://hikiyami.github.io/link-formatter/">
-        <meta property="twitter:title" content="منسق الروابط - أداة لتنسيق وتنظيم الروابط">
-        <meta property="twitter:description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
-        <meta property="twitter:image" content="./icons/og-image.png">
-    
-        <!-- Favicon and Apple Touch Icon -->
-        <link rel="icon" href="./icons/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
-        
-        <!-- Web App Manifest -->
-        <link rel="manifest" href="./icons/site.webmanifest">
-        
-        <!-- Theme Color for Mobile Browsers -->
-        <meta name="theme-color" content="#ffffff">
-        
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>منسق الروابط - أداة لتنسيق وتنظيم الروابط</title>
+
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
+    <meta name="keywords"
+        content="منسق روابط, تنظيم روابط, أداة ويب, BBCode, URL, HTML, format links, link formatter, link organizer">
+    <meta name="author" content="Hikiyami">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hikiyami.github.io/link-formatter/">
+    <meta property="og:title" content="منسق الروابط - أداة لتنسيق وتنظيم الروابط">
+    <meta property="og:description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
+    <meta property="og:image" content="./icons/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://hikiyami.github.io/link-formatter/">
+    <meta property="twitter:title" content="منسق الروابط - أداة لتنسيق وتنظيم الروابط">
+    <meta property="twitter:description"
+        content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
+    <meta property="twitter:image" content="./icons/og-image.png">
+
+    <!-- Favicon and Apple Touch Icon -->
+    <link rel="icon" href="./icons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="./icons/site.webmanifest">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary-color: #3498db;
@@ -62,7 +64,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--background-color);
@@ -87,10 +89,11 @@
             margin-bottom: 2rem;
             font-weight: 700;
             font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .input-section, .output-section {
+        .input-section,
+        .output-section {
             background-color: white;
             padding: 2rem;
             border-radius: 15px;
@@ -99,7 +102,8 @@
             margin-bottom: 2rem;
         }
 
-        .dark-mode .input-section, .dark-mode .output-section {
+        .dark-mode .input-section,
+        .dark-mode .output-section {
             background-color: #34495e;
         }
 
@@ -112,7 +116,9 @@
             width: 48%;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 0.75rem;
             margin-bottom: 1rem;
@@ -123,13 +129,23 @@
             font-size: 16px;
         }
 
-        .dark-mode input, .dark-mode select, .dark-mode textarea {
+        .dark-mode input,
+        .dark-mode select,
+        .dark-mode textarea {
             background-color: #2c3e50;
             color: #ecf0f1;
             border-color: #7f8c8d;
         }
 
-        input:focus, select:focus, textarea:focus {
+        .dark-mode input::placeholder,
+        .dark-mode select::placeholder,
+        .dark-mode textarea::placeholder {
+            color: #bdc3c7;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
             border-color: var(--primary-color);
         }
@@ -270,15 +286,20 @@
             margin-bottom: 1rem;
         }
 
-        #htmlResult table, #htmlResult th, #htmlResult td {
+        #htmlResult table,
+        #htmlResult th,
+        #htmlResult td {
             border: 1px solid #ddd;
         }
 
-        .dark-mode #htmlResult table, .dark-mode #htmlResult th, .dark-mode #htmlResult td {
+        .dark-mode #htmlResult table,
+        .dark-mode #htmlResult th,
+        .dark-mode #htmlResult td {
             border-color: #7f8c8d;
         }
 
-        #htmlResult th, #htmlResult td {
+        #htmlResult th,
+        #htmlResult td {
             padding: 0.5rem;
             text-align: center;
         }
@@ -331,12 +352,16 @@
             border-radius: 8px;
         }
 
-        .btn-up, .btn-down, .btn-delete {
+        .btn-up,
+        .btn-down,
+        .btn-delete {
             background-color: var(--primary-color);
             color: white;
         }
 
-        .btn-up:hover, .btn-down:hover, .btn-delete:hover {
+        .btn-up:hover,
+        .btn-down:hover,
+        .btn-delete:hover {
             background-color: #2980b9;
         }
 
@@ -389,7 +414,7 @@
 
 <body>
     <button id="darkModeToggle">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dark-mode-toggle-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dark-mode-toggle-icon" style="display: block;">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="light-mode-toggle-icon" style="display: none;">
@@ -427,6 +452,8 @@
                     <option value="auto">تلقائي</option>
                     <option value="manual">يدوي</option>
                 </select>
+                <label for="startNumber">رقم البداية للترقيم التلقائي:</label>
+                <input type="number" id="startNumber" value="1" min="0">
                 <label for="format">تنسيق النتيجة:</label>
                 <select id="format">
                     <option value="list">قائمة</option>
@@ -439,7 +466,8 @@
         </div>
         <div class="output-section">
             <div id="bbcodeResult" class="result"></div>
-            <button id="copyBBCodeBtn" class="btn btn-info copyBtn" onclick="copyResult('bbcodeResult')">نسخ النتيجة (BBCode)</button>
+            <button id="copyBBCodeBtn" class="btn btn-info copyBtn" onclick="copyResult('bbcodeResult')">نسخ النتيجة
+                (BBCode)</button>
             <div id="htmlResult" class="result"></div>
             <!-- <button id="copyHTMLBtn" class="btn btn-info copyBtn" onclick="copyResult('htmlResult')">نسخ النتيجة (HTML)</button> -->
         </div>
@@ -459,7 +487,7 @@
             document.documentElement.classList.toggle('dark-mode');
             const isDarkMode = document.documentElement.classList.contains('dark-mode');
             localStorage.setItem(BASE_LS_KEY + 'dark_mode', isDarkMode);
-            if(isDarkMode) {
+            if (isDarkMode) {
                 darkModeToggleText.style.display = 'none';
                 lightModeToggleText.style.display = 'block';
             } else {
@@ -480,7 +508,8 @@
 
         const updateLineNumbers = () => {
             const lines = editor.value.split('\n');
-            lineNumbers.innerHTML = lines.map((_, index) => `<div>${index + 1}</div>`).join('');
+            const startNumber = parseInt(document.getElementById('startNumber').value);
+            lineNumbers.innerHTML = lines.map((_, index) => `<div>${index + startNumber}</div>`).join('');
         };
 
         editor.addEventListener('input', updateLineNumbers);
@@ -511,17 +540,17 @@
             const linkInputs = document.getElementById('linkInputs');
             const li = document.createElement('li');
             li.className = 'link-input';
-            
+
             const container = document.createElement('div');
             container.className = 'link-input-container';
-            
+
             let linkInput = createLinkInputElement({ type: 'link', placeholder: 'الرابط', value: link });
             container.appendChild(linkInput);
             container.appendChild(createLinkInputElement({ type: 'label', placeholder: 'التسمية', value: label }));
             container.appendChild(createButton({ text: '↑', onClick: () => moveLink(li, 'up'), className: 'btn-up' }));
             container.appendChild(createButton({ text: '↓', onClick: () => moveLink(li, 'down'), className: 'btn-down' }));
             container.appendChild(createButton({ text: 'x', onClick: () => deleteLink(li), className: 'btn-delete' }));
-            
+
             li.appendChild(container);
             linkInputs.appendChild(li);
             linkInput.focus();
@@ -542,7 +571,7 @@
             if (sibling) {
                 linkInputs.insertBefore(direction === 'up' ? li : sibling, direction === 'up' ? sibling : li);
             } else {
-                if(direction === 'up') linkInputs.appendChild(li);
+                if (direction === 'up') linkInputs.appendChild(li);
                 else linkInputs.insertBefore(li, linkInputs.firstElementChild);
             }
         };
@@ -552,19 +581,20 @@
                 numbering: document.getElementById('numbering').value,
                 separator: document.getElementById('separator').value,
                 format: document.getElementById('format').value,
-                linksPerRow: parseInt(document.getElementById('linksPerRow').value)
+                linksPerRow: parseInt(document.getElementById('linksPerRow').value),
+                startNumber: parseInt(document.getElementById('startNumber').value)
             };
-            
+
             const formatFunction = config.format === 'list' ? formatLinksList : formatLinksTable;
             const bbcodeResult = formatFunction({ ...config, outputType: 'bbcode' });
             const htmlResult = formatFunction({ ...config, outputType: 'html' });
-            
+
             document.getElementById('bbcodeResult').textContent = bbcodeResult.trim();
             document.getElementById('htmlResult').innerHTML = htmlResult.trim();
         };
 
         const getLinks = (numbering) => {
-            return numbering === 'auto' ? getTextareaLinks() : 
+            return numbering === 'auto' ? getTextareaLinks() :
                 Array.from(document.querySelectorAll('#linkInputs li'))
                     .map(li => ({
                         link: li.querySelector('.link').value.trim(),
@@ -573,19 +603,19 @@
                     .filter(item => item.label);
         };
 
-        const formatLinksList = ({ numbering, separator, linksPerRow, outputType }) => {
+        const formatLinksList = ({ numbering, separator, linksPerRow, outputType, startNumber }) => {
             const links = getLinks(numbering);
             return links.reduce((result, link, index) => {
                 if (index % linksPerRow === 0 && index !== 0) result += '\n\n';
-                const formattedLink = formatLink({ link, index, numbering, outputType });
+                const formattedLink = formatLink({ link, index, numbering, outputType, startNumber });
                 const isLastElement = index === links.length - 1;
                 const isLastInRow = (index + 1) % linksPerRow === 0;
-                return result + formattedLink + 
+                return result + formattedLink +
                     (!isLastElement && !isLastInRow ? separator : '');
             }, '');
         };
 
-        const formatLinksTable = ({ numbering, linksPerRow, outputType }) => {
+        const formatLinksTable = ({ numbering, linksPerRow, outputType, startNumber }) => {
             const links = getLinks(numbering);
             const tableStart = outputType === 'bbcode' ? '[table]\n' : '<table>\n';
             const tableEnd = outputType === 'bbcode' ? '[/table]' : '</table>';
@@ -594,14 +624,14 @@
 
             return tableStart + links.reduce((result, link, index) => {
                 if (index % linksPerRow === 0) result += rowStart;
-                result += formatLink({ link, index, numbering, outputType, isTable: true });
+                result += formatLink({ link, index, numbering, outputType, isTable: true, startNumber });
                 if (index % linksPerRow === linksPerRow - 1 || index === links.length - 1) result += rowEnd;
                 return result;
             }, '') + tableEnd;
         };
 
-        const formatLink = ({ link, index, numbering, outputType, isTable = false, paddingStart = 2 }) => {
-            const number = (index + 1).toString().padStart(paddingStart, '0');
+        const formatLink = ({ link, index, numbering, outputType, isTable = false, startNumber, paddingStart = 2 }) => {
+            const number = (index + startNumber).toString().padStart(paddingStart, '0');
             const displayText = numbering === 'auto' ? number : (link.label || number);
             const url = numbering === 'auto' ? link : link.link;
             if (outputType === 'bbcode') {
@@ -615,9 +645,12 @@
             const numbering = document.getElementById('numbering').value;
             document.getElementById('autoInputs').style.display = numbering === 'auto' ? 'block' : 'none';
             document.getElementById('manualInputs').style.display = numbering === 'auto' ? 'none' : 'block';
+            document.getElementById('startNumber').style.display = numbering === 'auto' ? 'inline-block' : 'none';
+            document.querySelector('label[for="startNumber"]').style.display = numbering === 'auto' ? 'inline-block' : 'none';
             if (numbering === 'manual' && document.querySelectorAll('.link-input').length === 0) {
                 addLinkInput();
             }
+            updateLineNumbers();
         };
 
         const getTextareaLinks = () => editor.value.split('\n').map(line => line.trim());
@@ -645,6 +678,7 @@
         };
 
         document.getElementById('numbering').addEventListener('change', toggleInputMode);
+        document.getElementById('startNumber').addEventListener('change', updateLineNumbers);
 
         // Initialize
         updateLineNumbers();
