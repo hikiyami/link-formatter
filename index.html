@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منسق الروابط</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <title>منسق الروابط - أداة لتنسيق وتنظيم الروابط</title>
+        
+        <!-- Meta tags for SEO -->
+        <meta name="description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
+        <meta name="keywords" content="منسق روابط, تنظيم روابط, أداة ويب, BBCode, URL, HTML, format links, link formatter, link organizer">
+        <meta name="author" content="Hikiyami">
+        <meta name="robots" content="index, follow">
+        
+        <!-- Open Graph -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://hikiyami.github.io/link-formatter/">
+        <meta property="og:title" content="منسق الروابط - أداة لتنسيق وتنظيم الروابط">
+        <meta property="og:description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
+        <meta property="og:image" content="./icons/og-image.png">
+    
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary">
+        <meta property="twitter:url" content="https://hikiyami.github.io/link-formatter/">
+        <meta property="twitter:title" content="منسق الروابط - أداة لتنسيق وتنظيم الروابط">
+        <meta property="twitter:description" content="أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية">
+        <meta property="twitter:image" content="./icons/og-image.png">
+    
+        <!-- Favicon and Apple Touch Icon -->
+        <link rel="icon" href="./icons/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+        
+        <!-- Web App Manifest -->
+        <link rel="manifest" href="./icons/site.webmanifest">
+        
+        <!-- Theme Color for Mobile Browsers -->
+        <meta name="theme-color" content="#ffffff">
+        
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+        
     <style>
         :root {
             --primary-color: #3498db;
@@ -13,6 +47,14 @@
             --accent-color: #e74c3c;
             --background-color: #f5f7fa;
             --text-color: #34495e;
+        }
+
+        :root.dark-mode {
+            --primary-color: #2980b9;
+            --secondary-color: #27ae60;
+            --accent-color: #c0392b;
+            --background-color: #2c3e50;
+            --text-color: #ecf0f1;
         }
 
         * {
@@ -27,6 +69,7 @@
             color: var(--text-color);
             min-height: 100vh;
             direction: rtl;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -56,6 +99,10 @@
             margin-bottom: 2rem;
         }
 
+        .dark-mode .input-section, .dark-mode .output-section {
+            background-color: #34495e;
+        }
+
         .input-section {
             display: flex;
             justify-content: space-between;
@@ -73,6 +120,13 @@
             border-radius: 8px;
             font-family: 'Cairo', sans-serif;
             transition: border-color 0.3s ease;
+            font-size: 16px;
+        }
+
+        .dark-mode input, .dark-mode select, .dark-mode textarea {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border-color: #7f8c8d;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -114,6 +168,11 @@
             white-space: pre-wrap;
             line-break: anywhere;
             border: 2px solid #e0e0e0;
+        }
+
+        .dark-mode .result {
+            background-color: #2c3e50;
+            border-color: #7f8c8d;
         }
 
         .btn-primary {
@@ -165,6 +224,10 @@
             overflow: hidden;
         }
 
+        .dark-mode .code-editor-container {
+            border-color: #7f8c8d;
+        }
+
         .line-numbers {
             padding: 10px;
             background-color: #f0f0f0;
@@ -172,15 +235,21 @@
             text-align: right;
             user-select: none;
             font-family: monospace;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.5;
+        }
+
+        .dark-mode .line-numbers {
+            background-color: #2c3e50;
+            border-right-color: #7f8c8d;
+            color: #ecf0f1;
         }
 
         #editor {
             flex-grow: 1;
             padding: 10px;
             font-family: monospace;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.5;
             white-space: pre;
             overflow-x: auto;
@@ -188,6 +257,11 @@
             resize: vertical;
             border: none;
             outline: none;
+        }
+
+        .dark-mode #editor {
+            background-color: #34495e;
+            color: #ecf0f1;
         }
 
         #htmlResult table {
@@ -200,6 +274,10 @@
             border: 1px solid #ddd;
         }
 
+        .dark-mode #htmlResult table, .dark-mode #htmlResult th, .dark-mode #htmlResult td {
+            border-color: #7f8c8d;
+        }
+
         #htmlResult th, #htmlResult td {
             padding: 0.5rem;
             text-align: center;
@@ -207,6 +285,10 @@
 
         #htmlResult tr:nth-child(even) {
             background-color: #f2f2f2;
+        }
+
+        .dark-mode #htmlResult tr:nth-child(even) {
+            background-color: #2c3e50;
         }
 
         #htmlResult a {
@@ -267,6 +349,23 @@
             margin-bottom: 10px;
         }
 
+        #darkModeToggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #darkModeToggle:hover {
+            background-color: var(--secondary-color);
+        }
+
         @media (max-width: 768px) {
             .input-section {
                 flex-direction: column;
@@ -289,6 +388,22 @@
 </head>
 
 <body>
+    <button id="darkModeToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dark-mode-toggle-icon">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="light-mode-toggle-icon" style="display: none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
     <div class="container">
         <h1>منسق الروابط</h1>
         <div class="input-section">
@@ -333,6 +448,35 @@
     <script>
         const editor = document.getElementById('editor');
         const lineNumbers = document.querySelector('.line-numbers');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeToggleText = darkModeToggle.querySelector('.dark-mode-toggle-icon');
+        const lightModeToggleText = darkModeToggle.querySelector('.light-mode-toggle-icon');
+
+        // Dark mode functionality
+        const BASE_LS_KEY = 'link_formatter_';
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark-mode');
+            const isDarkMode = document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem(BASE_LS_KEY + 'dark_mode', isDarkMode);
+            if(isDarkMode) {
+                darkModeToggleText.style.display = 'none';
+                lightModeToggleText.style.display = 'block';
+            } else {
+                darkModeToggleText.style.display = 'block';
+                lightModeToggleText.style.display = 'none';
+            }
+        }
+
+        // Check if dark mode was previously set
+        if (localStorage.getItem(BASE_LS_KEY + 'dark_mode') === 'true') {
+            document.documentElement.classList.add('dark-mode');
+            darkModeToggleText.style.display = 'none';
+            lightModeToggleText.style.display = 'block';
+        }
+
+        // Add event listener to dark mode toggle button
+        darkModeToggle.addEventListener('click', toggleDarkMode);
 
         const updateLineNumbers = () => {
             const lines = editor.value.split('\n');
