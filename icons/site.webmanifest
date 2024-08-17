@@ -1,0 +1,21 @@
+{
+  "name": "منسق الروابط",
+  "short_name": "منسق الروابط",
+  "description": "أداة سهلة الاستخدام لتنسيق وتنظيم الروابط للمنتديات والمواقع الإلكترونية",
+  "icons": [
+    {
+      "src": "./icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "https://hikiyami.github.io/link-formatter/",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
